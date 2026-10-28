@@ -553,7 +553,6 @@ if("speechSynthesis"in window){loadV();speechSynthesis.onvoiceschanged=loadV}
 function sc(v,l){return(/natural|neural|online|enhanced|premium|google/i.test(v.name)?4:0)+(v.lang.replace("_","-")==l?2:0)+(v.localService?0:1)}
 function cands(l){const p=l.slice(0,2);return vs.filter(v=>v.lang.toLowerCase().replace("_","-").startsWith(p)).sort((a,b)=>sc(b,l)-sc(a,l))}
 function pick(l){const c=cands(l);let s="";try{s=localStorage.getItem("v"+l)||""}catch(e){}return c.find(v=>v.name==s)||c[0]}
-function renderVp(){const e=$("vp");if(!e)return;e.innerHTML=[["en-IN","🎙️ English awaaz chuno"],["hi-IN","🎙️ Hindi awaaz chuno"]].map(([l,t])=>{const c=cands(l),cur=pick(l);return `<label class="vl">${t}<select data-vl="${l}">${c.length?c.map(v=>`<option${cur&&v.name==cur.name?" selected":""}>${v.name}</option>`).join(""):"<option>Koi awaaz nahi mili</option>"}</select></label>`}).join("")}
 function say(t,l){return new Promise(r=>{const u=new SpeechSynthesisUtterance(t),p=l.slice(0,2);u.lang=l;u.rate=rate;
 const v=pick(l);if(v)u.voice=v;
 u.onend=u.onerror=()=>r();speechSynthesis.speak(u)})}
