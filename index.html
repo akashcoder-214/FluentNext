@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>FluentNext</title>
+j<!DOCTYPE html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>FluentNext</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f5f0ff;--card:#fff;--ink:#1e1b3a;--mut:#5f5a85;--ac:#7c3aed;--acs:#e9ddff;--hi:#fff0a3;--ln:#e2d9f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -553,7 +553,6 @@ if("speechSynthesis"in window){loadV();speechSynthesis.onvoiceschanged=loadV}
 function sc(v,l){return(/natural|neural|online|enhanced|premium|google/i.test(v.name)?4:0)+(v.lang.replace("_","-")==l?2:0)+(v.localService?0:1)}
 function cands(l){const p=l.slice(0,2);return vs.filter(v=>v.lang.toLowerCase().replace("_","-").startsWith(p)).sort((a,b)=>sc(b,l)-sc(a,l))}
 function pick(l){const c=cands(l);let s="";try{s=localStorage.getItem("v"+l)||""}catch(e){}return c.find(v=>v.name==s)||c[0]}
-function renderVp(){const e=$("vp");if(!e)return;e.innerHTML=[["en-IN","🎙️ English awaaz chuno"],["hi-IN","🎙️ Hindi awaaz chuno"]].map(([l,t])=>{const c=cands(l),cur=pick(l);return `<label class="vl">${t}<select data-vl="${l}">${c.length?c.map(v=>`<option${cur&&v.name==cur.name?" selected":""}>${v.name}</option>`).join(""):"<option>Koi awaaz nahi mili</option>"}</select></label>`}).join("")}
 function say(t,l){return new Promise(r=>{const u=new SpeechSynthesisUtterance(t),p=l.slice(0,2);u.lang=l;u.rate=rate;
 const v=pick(l);if(v)u.voice=v;
 u.onend=u.onerror=()=>r();speechSynthesis.speak(u)})}
